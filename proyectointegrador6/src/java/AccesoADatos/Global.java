@@ -9,8 +9,8 @@ package AccesoADatos;
  * @author root
  */
 public class Global { 
-    public static final  String url="jdbc:postgresql://localhost:5432/db_inventario";
-    public static final  String user="postgres";
-    public static final  String pass="123";
+    public static final  String url="node26774-env-9923925.jelastic.saveincloud.net/";
+    public static final  String user="webadmin";
+    public static final  String pass="RGAqil50415";
     public static final  String driver="org.postgresql.Driver";
 }
