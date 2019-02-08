@@ -3,8 +3,8 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
- List<Proveedores> lista= Proveedores.proveedores_buscartodos();
- Iterator<Proveedores> itProveedores=lista.iterator();
+ List<Proveedor> lista= Proveedor.proveedor_buscartodos();
+ Iterator<Proveedor> itProveedor=lista.iterator();
 %>
 <%
  List<Producto> listap= Producto.producto_buscartodos();
@@ -13,14 +13,14 @@
 
 
 <%!
-   Ordenes ordenes= new Ordenes();
+   Orden orden= new Orden();
 %>
 <%
     try {
         
          int codigo= Integer.parseInt(request.getParameter("codigo"));
       //  out.print("<script>alert("+codigo+");</script>");
-         ordenes=Ordenes.ordenes_buscarporid(codigo);                       
+         orden=Orden.orden_buscarporid(codigo);                       
         } catch (Exception e) {
         }
    
@@ -30,36 +30,32 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Venta</title>
+        <title>Editar Orden</title>
      
     </head>
     
     <body>                    
           <form method="POST" action="procesa_editar.jsp">
-          <input type="hidden" id="codigo" name="codigo" value="<%=ordenes.getOrdenid()%>">  
+          <input type="hidden" id="codigo" name="codigo" value="<%=orden.getOrdenid()%>">         
+          <select required class="form-control" placeholder="Id Proveedor" id="id_proveedor" value="<%=orden.getProveedor()%>"  name="id_proveedor">
           
-          <select required class="form-control" placeholder="Proveedorid Proveedor" id="proveedorid" value="<%=ordenes.getProveedores()%>"  name="proveedorid">
-          
-            <%while(itProveedores.hasNext()){
-                Proveedores proveedores=itProveedores.next();%> %>
-            <option value="<%=proveedores.getProveedorid()%>"><%=proveedores.getNombreproveedor()%></option>
+            <%while(itProveedor.hasNext()){
+                Proveedor proveedor=itProveedor.next();%> %>
+            <option value="<%=proveedor.getProveedorid()%>"><%=proveedor.getNombreproveedor()%></option>
             <% } %>
-                                  
-            </select>
-            <select required class="form-control" placeholder="Productoid Producto" id="productoid" value="<%=ordenes.getProducto()%>" name="productoid">              
+          </select>
+          <select required class="form-control" placeholder="Id Producto" id="id_producto" value="<%=orden.getProducto()%>" name="id_producto">              
           
             <%while(itProducto.hasNext()){
                 Producto producto=itProducto.next();%> %>
             <option value="<%=producto.getProductoid()%>"><%=producto.getNombreproducto()%></option>
             <% } %>                             
-            </select>
-          <input type="text" required class="form-control" placeholder="Cantidad Ordenes" id="cantidad_ordenes" value="<%=ordenes.getCantidad()%>" name="cantidad_ordenes"/>
-          <input type="text" required class="form-control" placeholder="Preciounitario Ordenes" id="preciounitario_ordenes" value="<%=ordenes.getPreciounitario()%>" name="preciounitario_ordenes"/>
-          <input type="text" required class="form-control" placeholder="Numeroorden Ordenes" id="numeroorden_ordenes" value="<%=ordenes.getNumeroorden()%>" name="numeroorden_ordenes"/>
-          <input type="text" required class="form-control" placeholder="Entregada Ordenes" id="entrega_ordenes" value="<%=ordenes.getEntregada()%>" name="entrega_ordenes"/>
-         <input type="text" required class="form-control" placeholder="Fechaentrega Ordenes" id="fechaentrega_ordenes" value="<%=ordenes.getFechaentrega()%>" name="fechaentrega_ordenes"/>
-     
-          
+            </select> 
+          <input type="text" required class="form-control" placeholder="Cantidad" id="cantidad" value="<%=orden.getCantidad()%>" name="cantidad_orden"/>
+          <input type="text" required class="form-control" placeholder="Precio unitario" id="preciounitario" value="<%=orden.getPreciounitario()%>" name="preciounitario_orden"/>
+          <input type="text" required class="form-control" placeholder="Numero orden" id="numero_orden" value="<%=orden.getNumeroorden()%>" name="numero_orden"/>          
+          <input type="text" required class="form-control" placeholder="Entregada" id="entregada" value="<%=orden.isEntregada()%>" name="entregada"/>          
+          <input type="text" required class="form-control" placeholder="Fecha" id="fecha_entrega" value="<%=orden.getFechaentrega()%>" name="fecha_entrega"/>
           
             <div class="modal-footer">
                 <button id="btn_guardar" name="btn_guardar" type="submit" class="btn btn-primary" >Guardar</button>
@@ -71,3 +67,4 @@
     </body>
     
 </html>
+

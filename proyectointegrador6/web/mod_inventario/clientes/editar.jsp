@@ -1,8 +1,3 @@
-<%-- 
-    Document   : editar
-    Created on : 09/01/2019, 17:27:36
-    Author     : sairy
---%>
 <%@page import="ReglasDeNegocio.Cliente"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -39,10 +34,10 @@
         
           <form method="POST" action="procesa_editar.jsp">
               <input type="hidden" id="codigo" name="codigo" value="<%=cliente.getClienteid()%>">
-              <input type="text" required class="form-control" placeholder="Nombre Cliente" id="nombre_cliente" value="<%=cliente.getNombres()%>" name="nombres_cliente"/>
-              <input type="text" required class="form-control" placeholder="Apellido Cliente" id="nombre_cliente" value="<%=cliente.getApellidos()%>" name="apellidos_cliente"/>
-          <input type="text" required class="form-control" placeholder="telefono Cliente" id="nombre_cliente" value="<%=cliente.getTelefono()%>" name="telefono_cliente"/>
-          <input type="text" required class="form-control" placeholder="Email Cliente" id="nombre_cliente" value="<%=cliente.getEmail()%>" name="email_cliente"/>
+              <input type="text" required class="form-control" placeholder="Nombre Cliente" id="nombres_cliente" value="<%=cliente.getNombres()%>" name="nombres_cliente"/>
+              <input type="text" required class="form-control" placeholder="Apellido Cliente" id="apellidos_cliente" value="<%=cliente.getApellidos()%>" name="apellidos_cliente"/>
+          <input type="text" required class="form-control" placeholder="telefono Cliente" id="telefono_cliente" value="<%=cliente.getTelefono()%>" name="telefono_cliente"/>
+          <input type="text" required class="form-control" placeholder="Email Cliente" id="email_cliente" value="<%=cliente.getEmail()%>" name="email_cliente"/>
           
           
             <div class="modal-footer">
@@ -55,3 +50,4 @@
     </body>
     
 </html>
+

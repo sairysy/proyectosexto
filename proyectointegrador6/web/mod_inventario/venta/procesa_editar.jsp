@@ -1,9 +1,7 @@
-<%@page import="ReglasDeNegocio.*"%>
 <%@page import="java.sql.Time"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*,ReglasDeNegocio.*"%>
-
+<%@page import="AccesoADatos.*"%>
 <!DOCTYPE html>
-
 <%
     try {
             Venta venta=new Venta();
@@ -17,13 +15,14 @@
             venta.setPreciounitarioventa(Double.valueOf(request.getParameter("preciounitario_venta")));                        
             venta.setFechatransaccion(Time.valueOf(request.getParameter("fechatransaccion_venta")));
             venta.setNumerofactura(request.getParameter("numero_factura"));
-            boolean result= Venta.venta_insertar(venta);
+            venta.setVentaid(Integer.valueOf(request.getParameter("codigo")));
+           boolean result= Venta.venta_editar(venta);
              if (result)
                 out.println("<script> location.replace('listar.jsp?alerta=si');</script>");
             else 
                 out.println("<script> location.replace('listar.jsp?alerta=no');</script>");
+
         } catch (Exception e) {
             out.print(e.getMessage());
         }
-
 %>

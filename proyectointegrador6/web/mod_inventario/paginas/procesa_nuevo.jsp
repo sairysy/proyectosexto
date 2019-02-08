@@ -1,14 +1,11 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*,ReglasDeNegocio.*"%>
 <!DOCTYPE html>
 <%
          try {
-            Paginas paginas=new Paginas();
-            paginas.setUrl(request.getParameter("url_paginas"));
-            paginas.setDescripcion(request.getParameter("descripcion_paginas"));
-           
-           boolean result= Paginas.paginas_insertar(paginas);
+            Sg_pagina sg_paginas=new Sg_pagina();
+            sg_paginas.setUrl(request.getParameter("url"));
+            sg_paginas.setDescripcion(request.getParameter("descripcion"));           
+           boolean result= Sg_pagina.sg_pagina_insertar(sg_paginas);
              if (result)
                 out.println("<script> location.replace('listar.jsp?alerta=si');</script>");
             else 

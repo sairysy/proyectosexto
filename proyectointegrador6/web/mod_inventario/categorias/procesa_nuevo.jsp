@@ -1,22 +1,23 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*,ReglasDeNegocio.*"%>
+
 <!DOCTYPE html>
+
 <%
-         try {
+    try {
             Categoria categoria=new Categoria();
-            categoria.setNombre(request.getParameter("nombre_categoria"));
-            categoria.setDescripcion(request.getParameter("descripcion_categoria"));
-            
+            categoria.setNombre(request.getParameter("nombre"));
+            categoria.setDescripcion(request.getParameter("descripcion"));
            boolean result= Categoria.categoria_insertar(categoria);
              if (result)
                 out.println("<script> location.replace('listar.jsp?alerta=si');</script>");
             else 
-                 out.println("<script> location.replace('listar.jsp?alerta=no');</script>");
-
+                out.println("<script> location.replace('listar.jsp?alerta=no');</script>");
         } catch (Exception e) {
             out.print(e.getMessage());
         }
 
-  
- %>
+%>
+
+
+
+

@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <%
          try {
-            Roles roles=new Roles();
-            roles.setNombre_rol(request.getParameter("nombre_rol_roles"));
-            roles.setDescripcion(request.getParameter("descripcion_roles"));
+           Sg_rol sg_roles=new Sg_rol();
+            sg_roles.setNombre_rol(request.getParameter("nombre_rol"));
+            sg_roles.setDescripcion(request.getParameter("descripcion"));
             
-           boolean result= Roles.roles_insertar(roles);
+           boolean result= Sg_rol.sg_rol_insertar(sg_roles);
              if (result)
                 out.println("<script> location.replace('listar.jsp?alerta=si');</script>");
             else 

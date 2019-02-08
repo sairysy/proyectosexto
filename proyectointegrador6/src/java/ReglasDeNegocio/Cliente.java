@@ -1,16 +1,17 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package ReglasDeNegocio;
-
-
 import AccesoADatos.*;
 import java.sql.*;
 import java.util.*;
-
-
+/**
+ *
+ * @author Cristian
+ */
 public class Cliente {
   private int clienteid;
   private String nombres;
@@ -97,10 +98,12 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
+    
     @Override
     public String toString() {
-        return getNombres();
+        return nombres;
     }
+    
     public static ArrayList<Cliente> cliente_buscartodos() throws Exception
     {
          //CREO LISTA QUE RECIBIRA LOS DATOS DEL RESULSET
@@ -143,7 +146,7 @@ public class Cliente {
 
     }
     
-    public static Cliente cliente_buscarporid(int piclienteid) throws Exception
+    public static Cliente cliente_buscarporid(int pscactbevidenid) throws Exception
     {
          //CREO LISTA QUE RECIBIRA LOS DATOS DEL RESULSET
        ArrayList<Cliente> lista= new ArrayList<Cliente>();
@@ -160,7 +163,7 @@ public class Cliente {
           //creo mi preparedstatement
           preStm=con.creaPreparedSmt(sql);
           //ejecuto el prepardestatement y le asigno a mi resulset
-          preStm.setInt(1, piclienteid);
+          preStm.setInt(1, pscactbevidenid);
           rs= con.ejecutaPrepared(preStm);
           obj=null;
           while (rs.next()) {
@@ -261,7 +264,7 @@ public class Cliente {
 
   }
      
-      public static boolean cliente_eliminar(int piclienteid) throws Exception
+      public static boolean cliente_eliminar(int pscactbevidenid) throws Exception
   {
       boolean respuesta=false;
       Conexion con = new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -275,7 +278,7 @@ public class Cliente {
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
-          parametros.add(new Parametro(1, piclienteid));
+          parametros.add(new Parametro(1, pscactbevidenid));
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
           comandos.add(cmd);

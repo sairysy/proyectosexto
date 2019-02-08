@@ -1,12 +1,12 @@
 
 
-<%@page import="ReglasDeNegocio.Paginas"%>
+<%@page import="ReglasDeNegocio.*"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
- List<Paginas> lista=Paginas.paginas_buscartodos();
- Iterator<Paginas> itPaginas=lista.iterator();
+ List<Sg_pagina> lista=Sg_pagina.sg_pagina_buscartodos();
+ Iterator<Sg_pagina> itSg_pagina=lista.iterator();
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@
        
 
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
-        <title>Paginass</title>
+        <title>Paginas</title>
     </head>
     <body>
          <!--Sección alerta-->
@@ -44,7 +44,6 @@
         </div>
        <% }%>
         <!--Fin Sección alerta-->
-        <center>  <button type="button" ><strong><a href="../../Menu.html">MENU</a></strong></button></center>
          <h1>Paginas</h1> 
            <button type="button" onclick="return modalnuevo();" class="btn btn-primary" data-toggle="modal" data-target="#ModalNuevo"> Nuevo</button>  
           
@@ -53,24 +52,20 @@
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">                <thead>
                 <th>Id</th>
                 <th>Url </th>
-                <th>Descripcion </th>
-                
-                
-                
+                <th>Descripcion </th>                                               
                 <th></th>
                 </thead>
                 <tbody>
-               <%while(itPaginas.hasNext()){
-                  Paginas paginas=itPaginas.next();%>
+               <%while(itSg_pagina.hasNext()){
+                  Sg_pagina sg_paginas=itSg_pagina.next();%>
                 <tr>
-                   <td><%= paginas.getPaginaid()%></td>
-                    <td><%= paginas.getUrl()%></td>
-                    <td><%= paginas.getDescripcion()%></td>
-                    
+                   <td><%= sg_paginas.getPaginaid()%></td>
+                    <td><%= sg_paginas.getUrl()%></td>
+                    <td><%= sg_paginas.getDescripcion()%></td>                    
                    
                    <td>
-                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= paginas.getPaginaid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
-                      <button type="button"  onclick="return modaleditar(<%= paginas.getPaginaid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
+                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= sg_paginas.getPaginaid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
+                      <button type="button"  onclick="return modaleditar(<%= sg_paginas.getPaginaid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
 
                    </td>
                 </tr>
@@ -83,7 +78,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Paginas</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Pagina</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -102,7 +97,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Paginas</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nueva Pagina</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>

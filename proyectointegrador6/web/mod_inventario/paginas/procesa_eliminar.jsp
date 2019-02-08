@@ -1,10 +1,10 @@
 
-<%@page import="ReglasDeNegocio.Paginas"%>
+<%@page import="ReglasDeNegocio.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
 try {
-       boolean result =Paginas.paginas_eliminar(Integer.valueOf(request.getParameter("codigo")));
+       boolean result =Sg_pagina.sg_pagina_eliminar(Integer.valueOf(request.getParameter("codigo")));
         if (result)
         out.println("<script> location.replace('listar.jsp?alerta=si');</script>");
         else 

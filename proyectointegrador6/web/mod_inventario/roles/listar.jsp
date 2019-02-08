@@ -1,12 +1,10 @@
-
-
-<%@page import="ReglasDeNegocio.Roles"%>
+<%@page import="ReglasDeNegocio.*"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
- List<Roles> lista=Roles.roles_buscartodos();
- Iterator<Roles> itRoles=lista.iterator();
+ List<Sg_rol> lista=Sg_rol.sg_rol_buscartodos();
+ Iterator<Sg_rol> itSg_rol=lista.iterator();
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +19,7 @@
        
 
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
-        <title>Roless</title>
+        <title>Rol</title>
     </head>
     <body>
          <!--Sección alerta-->
@@ -45,31 +43,27 @@
        <% }%>
         <!--Fin Sección alerta-->
         <center>  <button type="button" ><strong><a href="../../Menu.html">MENU</a></strong></button></center>
-         <h1>Roles</h1> 
+         <h1>Rol</h1> 
            <button type="button" onclick="return modalnuevo();" class="btn btn-primary" data-toggle="modal" data-target="#ModalNuevo"> Nuevo</button>  
           
-         
-         
+          
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">                <thead>
                 <th>Id</th>
-                <th>Nombre_rol</th>
-                <th>Descripcion</th>
-              
-                
+                <th>Nombre rol</th>
+                <th>Descripcion</th>                          
                 <th></th>
                 </thead>
                 <tbody>
-               <%while(itRoles.hasNext()){
-                  Roles roles=itRoles.next();%>
+               <%while(itSg_rol.hasNext()){
+                  Sg_rol sg_roles=itSg_rol.next();%>
                 <tr>
-                   <td><%= roles.getRolid()%></td>
-                   <td><%= roles.getNombre_rol()%></td>
-                    <td><%= roles.getDescripcion()%></td>
-                    
-                   
-                   <td>
-                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= roles.getRolid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
-                      <button type="button"  onclick="return modaleditar(<%= roles.getRolid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
+                   <td><%= sg_roles.getRolid()%></td>
+                   <td><%= sg_roles.getNombre_rol()%></td>
+                    <td><%= sg_roles.getDescripcion()%></td>                    
+                     
+                 <td>
+                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= sg_roles.getRolid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
+                      <button type="button"  onclick="return modaleditar(<%= sg_roles.getRolid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
 
                    </td>
                 </tr>
@@ -82,7 +76,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Roles</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -101,7 +95,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Roles</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>

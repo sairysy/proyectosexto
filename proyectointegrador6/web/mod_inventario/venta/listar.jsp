@@ -1,12 +1,11 @@
 
-
-<%@page import="ReglasDeNegocio.Rolpagina"%>
+<%@page import="ReglasDeNegocio.Venta"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
- List<Rolpagina> lista=Rolpagina.rolpagina_buscartodos();
- Iterator<Rolpagina> itRolpagina=lista.iterator();
+ List<Venta> lista=Venta.venta_buscartodos();
+ Iterator<Venta> itVenta=lista.iterator();
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +20,7 @@
        
 
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
-        <title>Rolpaginas</title>
+        <title>Ventas</title>
     </head>
     <body>
          <!--Sección alerta-->
@@ -44,32 +43,35 @@
         </div>
        <% }%>
         <!--Fin Sección alerta-->
-    <center>  <button type="button" ><strong><a href="../../Menu.html">MENU</a></strong></button></center>
-         <h1>Role_Pagina</h1> 
+        <center>  <button type="button" ><strong><a href="../../Menu.html">MENU</a></strong></button></center>
+         <h1>Ventas</h1> 
            <button type="button" onclick="return modalnuevo();" class="btn btn-primary" data-toggle="modal" data-target="#ModalNuevo"> Nuevo</button>  
-        
-         
+          
          
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">                <thead>
                 <th>Id</th>
-              
-                <th>Rol</th>
-                  <th>Pagina</th>
-                               
-                             
+                <th>Producto</th>
+                <th>Cliente</th>
+                <th>Cantidad</th>
+                <th>Precio unitario venta</th>                
+                <th>Fecha transaccion</th>
+                <th>Numero venta</th>               
                 <th></th>
                 </thead>
                 <tbody>
-               <%while(itRolpagina.hasNext()){
-                  Rolpagina rolpagina=itRolpagina.next();%>
+               <%while(itVenta.hasNext()){
+                  Venta venta=itVenta.next();%>
                 <tr>
-                   <td><%= rolpagina.getRolpaginaid()%></td>
-                   
-                    <td><%= rolpagina.getRoles()%></td>
-                    <td><%= rolpagina.getPaginas()%></td>
-                   <td>
-                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= rolpagina.getRolpaginaid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
-                      <button type="button"  onclick="return modaleditar(<%= rolpagina.getRolpaginaid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
+                   <td><%= venta.getVentaid()%></td>
+                   <td><%= venta.getCliente()%></td>
+                    <td><%= venta.getProducto()%></td>
+                    <td><%= venta.getCantidad()%></td>
+                    <td><%= venta.getPreciounitarioventa()%></td>
+                    <td><%= venta.getFechatransaccion()%></td>
+                    <td><%= venta.getNumerofactura()%></td>
+                       <td>
+                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= venta.getVentaid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
+                      <button type="button"  onclick="return modaleditar(<%= venta.getVentaid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
 
                    </td>
                 </tr>
@@ -82,7 +84,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Rolpagina</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -101,7 +103,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Rolpagina</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>

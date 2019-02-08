@@ -1,29 +1,24 @@
-<%@page import="java.sql.Timestamp"%>
-<%@page import="ReglasDeNegocio.*"%>
-<%@page import="java.sql.Time"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" import="java.util.*,ReglasDeNegocio.*"%>
+<%@page import="ReglasDeNegocio.Orden"%>
+<%@page import="java.sql.Timestamp"%>
 
 <!DOCTYPE html>
 
 <%
     try {
-            Ordenes ordenes=new Ordenes();
-            
-            Proveedores proveedores = new Proveedores();
-            Proveedores proveedoress = proveedores.proveedores_buscarporid(Integer.valueOf(request.getParameter("proveedorid")));
-            ordenes.setProveedores(proveedoress);
-            
-             Producto producto = new Producto();            
-            Producto productos = producto.producto_buscarporid(Integer.valueOf(request.getParameter("productoid")));       
-            ordenes.setProducto(productos);
- 
-            
-            ordenes.setCantidad(Integer.valueOf(request.getParameter("cantidad_ordenes")));
-            ordenes.setPreciounitario(Double.valueOf(request.getParameter("preciounitario_ordenes")));
-             ordenes.setNumeroorden(request.getParameter("numeroorden_ordenes"));
-            ordenes.setEntregada(Boolean.valueOf(request.getParameter("entregada_ordenes"))); 
-            ordenes.setFechaentrega(Timestamp.valueOf(request.getParameter("fechaentrega_ordenes"))); 
-            boolean result= Ordenes.ordenes_insertar(ordenes);
+            Orden orden=new Orden();
+            Proveedor proveedor = new Proveedor();
+            Proveedor proveedores = proveedor.proveedor_buscarporid(Integer.valueOf(request.getParameter("id_proveedor")));
+            Producto producto = new Producto();            
+            Producto productos = producto.producto_buscarporid(Integer.valueOf(request.getParameter("id_producto")));
+            orden.setProveedor(proveedores);            
+            orden.setProducto(productos);            
+            orden.setCantidad(Integer.valueOf(request.getParameter("cantidad_orden")));
+            orden.setPreciounitario(Double.valueOf(request.getParameter("preciounitario_orden")));                        
+            orden.setNumeroorden(request.getParameter("numero_orden"));
+            orden.setEntregada(Boolean.valueOf(request.getParameter("entregada")));
+            orden.setFechaentrega(Timestamp.valueOf(request.getParameter("fecha_entrega")));
+            boolean result= Orden.orden_insertar(orden);
              if (result)
                 out.println("<script> location.replace('listar.jsp?alerta=si');</script>");
             else 
@@ -33,3 +28,7 @@
         }
 
 %>
+
+
+
+

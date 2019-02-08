@@ -37,14 +37,14 @@
     <body>                    
           <form method="POST" action="procesa_editar.jsp">
           <input type="hidden" id="codigo" name="codigo" value="<%=venta.getVentaid()%>">         
-          <select required class="form-control" placeholder="Clienteid Cliente" id="clienteid" value="<%=venta.getCliente()%>"  name="clienteid">
+          <select required class="form-control" placeholder="Id Cliente" id="id_cliente" value="<%=venta.getCliente()%>"  name="id_cliente">
           
             <%while(itCliente.hasNext()){
                 Cliente cliente=itCliente.next();%> %>
             <option value="<%=cliente.getClienteid()%>"><%=cliente.getNombres()%></option>
             <% } %>
           </select>
-          <select required class="form-control" placeholder="Productoid Producto" id="productoid" value="<%=venta.getProducto()%>" name="productoid">              
+          <select required class="form-control" placeholder="Id Producto" id="id_producto" value="<%=venta.getProducto()%>" name="id_producto">              
           
             <%while(itProducto.hasNext()){
                 Producto producto=itProducto.next();%> %>
@@ -52,9 +52,9 @@
             <% } %>                             
             </select> 
           <input type="text" required class="form-control" placeholder="Cantidad venta" id="cantidad_venta" value="<%=venta.getCantidad()%>" name="cantidad_venta"/>
-          <input type="text" required class="form-control" placeholder="Preciounitario venta" id="preciounitario_venta" value="<%=venta.getPreciounitarioventa()%>" name="preciounitario_venta"/>
-          <input type="text" required class="form-control" placeholder="Fechatransaccion venta" id="fechatransaccion" value="<%=venta.getFechatransaccion()%>" name="fechatransaccion_venta"/>          
-          <input type="text" required class="form-control" placeholder="Numerofactura venta" id="numerofactura" value="<%=venta.getNumerofactura()%>" name="numero_factura"/>
+          <input type="text" required class="form-control" placeholder="Precio unitario venta" id="preciounitario_venta" value="<%=venta.getPreciounitarioventa()%>" name="preciounitario_venta"/>
+          <input type="text" required class="form-control" placeholder="Fecha transaccion" id="fechatransaccion" value="<%=venta.getFechatransaccion()%>" name="fechatransaccion_venta"/>          
+          <input type="text" required class="form-control" placeholder="Numero factura" id="numero_factura" value="<%=venta.getNumerofactura()%>" name="numero_factura"/>
           
           
             <div class="modal-footer">
@@ -67,3 +67,4 @@
     </body>
     
 </html>
+

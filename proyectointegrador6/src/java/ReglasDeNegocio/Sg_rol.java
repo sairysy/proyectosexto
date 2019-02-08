@@ -1,57 +1,92 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ReglasDeNegocio;
-import AccesoADatos.*;
-import java.sql.*;
-import java.util.*;
-import java.sql.Time;
 
-public class Usuariorol {
-  private int usuariorolid;
-  private Usuarios usuarios;
-  private Roles roles;
-  
+import AccesoADatos.Comando;
+import AccesoADatos.Conexion;
+import AccesoADatos.Global;
+import AccesoADatos.Parametro;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
-    public Usuariorol() {
+/**
+ *
+ * @author DiegoPatricio
+ */
+public class Sg_rol {
+    
+    private int rolid;
+    private String nombre_rol;
+    private String descripcion;
+
+    public Sg_rol() {
     }
 
-    public Usuariorol(int usuariorolid, Usuarios usuarios, Roles roles) {
-        this.usuariorolid = usuariorolid;
-        this.usuarios = usuarios;
-        this.roles = roles;
+    public Sg_rol(int rolid, String nombre_rol, String descripcion) {
+        this.rolid = rolid;
+        this.nombre_rol = nombre_rol;
+        this.descripcion = descripcion;
     }
 
-    public int getUsuariorolid() {
-        return usuariorolid;
+    /**
+     * @return the rolid
+     */
+    public int getRolid() {
+        return rolid;
     }
 
-    public void setUsuariorolid(int usuariorolid) {
-        this.usuariorolid = usuariorolid;
+    /**
+     * @param rolid the rolid to set
+     */
+    public void setRolid(int rolid) {
+        this.rolid = rolid;
     }
 
-    public Usuarios getUsuarios() {
-        return usuarios;
+    /**
+     * @return the nombre_rol
+     */
+    public String getNombre_rol() {
+        return nombre_rol;
     }
 
-    public void setUsuarios(Usuarios usuarios) {
-        this.usuarios = usuarios;
+    /**
+     * @param nombre_rol the nombre_rol to set
+     */
+    public void setNombre_rol(String nombre_rol) {
+        this.nombre_rol = nombre_rol;
     }
 
-    public Roles getRoles() {
-        return roles;
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setRoles(Roles roles) {
-        this.roles = roles;
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-   
-
+    @Override
+    public String toString() {
+        return nombre_rol; //To change body of generated methods, choose Tools | Templates.
+    }
 
     
-    public static ArrayList<Usuariorol> usuariorol_buscartodos() throws Exception
+    
+    public static ArrayList<Sg_rol> sg_rol_buscartodos() throws Exception
     {
          //CREO LISTA QUE RECIBIRA LOS DATOS DEL RESULSET
-        ArrayList<Usuariorol> lista= new ArrayList<Usuariorol>();
-          Usuariorol obj= new Usuariorol();
+        ArrayList<Sg_rol> lista= new ArrayList<Sg_rol>();
+          Sg_rol obj= new Sg_rol();
        ResultSet rs= null;
       //LLAMO LA CONEXION
       Conexion con= new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -60,7 +95,7 @@ public class Usuariorol {
 
       try {
           //declaro mi sql
-          String sql= "select * from public.usuario_rol_buscartodos()";
+          String sql= "select * from public.sg_roles_buscartodos()";
           //creo mi preparedstatement
           preStm=con.creaPreparedSmt(sql);
           //ejecuto el prepardestatement y le asigno a mi resulset
@@ -68,15 +103,10 @@ public class Usuariorol {
           rs= con.ejecutaPrepared(preStm);
           obj=null;
           while (rs.next()) {
-              obj= new Usuariorol();
-              obj.setUsuariorolid(rs.getInt("pusuariorolid"));
-              Usuarios usuarios=new Usuarios();
-              Usuarios usuarioss=usuarios.usuarios_buscarporid(rs.getInt("pusuarioid"));
-              obj.setUsuarios(usuarioss);
-              Roles roles=new Roles();
-              Roles roless=roles.roles_buscarporid(rs.getInt("prolid"));
-              obj.setRoles(roless);
-           
+              obj= new Sg_rol();
+              obj.setRolid(rs.getInt("prolid"));
+              obj.setNombre_rol(rs.getString("pnombre_rol"));
+              obj.setDescripcion(rs.getString("pdescripcion"));
               
               lista.add(obj);
           }
@@ -92,15 +122,11 @@ public class Usuariorol {
             return lista;
 
     }
-
     
-    
-    
-    public static Usuariorol usuariorol_buscarporid(int pscactbevidenid) throws Exception
+    public static Sg_rol sg_rol_buscarporid(int pscactbevidenid) throws Exception
     {
          //CREO LISTA QUE RECIBIRA LOS DATOS DEL RESULSET
-       ArrayList<Usuariorol> lista= new ArrayList<Usuariorol>();
-       Usuariorol obj= new Usuariorol();
+          Sg_rol obj= new Sg_rol();
        ResultSet rs= null;
       //LLAMO LA CONEXION
       Conexion con= new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -109,7 +135,7 @@ public class Usuariorol {
        
       try {
           //declaro mi sql
-          String sql= "select * from public.usuario_rol_buscarporid(?)";
+          String sql= "select * from public.sg_roles_buscarporid(?)";
           //creo mi preparedstatement
           preStm=con.creaPreparedSmt(sql);
           //ejecuto el prepardestatement y le asigno a mi resulset
@@ -117,16 +143,11 @@ public class Usuariorol {
           rs= con.ejecutaPrepared(preStm);
           obj=null;
           while (rs.next()) {
-              obj= new Usuariorol();
-              obj.setUsuariorolid(rs.getInt("pusuariorolid"));
-              Usuarios usuarios=new Usuarios();
-              Usuarios usuarioss=usuarios.usuarios_buscarporid(rs.getInt("pusuarioid"));
-              obj.setUsuarios(usuarioss);
-              Roles roles=new Roles();
-              Roles roless=roles.roles_buscarporid(rs.getInt("prolid"));
-              obj.setRoles(roless);
+              obj= new Sg_rol();
+              obj.setRolid(rs.getInt("prolid"));
+              obj.setNombre_rol(rs.getString("pnombre_rol"));
+              obj.setDescripcion(rs.getString("pdescripcion"));
               
-              lista.add(obj);
           }
       } catch (SQLException e) {
           System.out.println(e.getMessage());
@@ -142,24 +163,24 @@ public class Usuariorol {
     }
     
     
-     public static boolean usuariorol_insertar(Usuariorol usuariorol) throws Exception
+     public static boolean sg_rol_insertar(Sg_rol sg_roles) throws Exception
   {
       boolean respuesta=false;
       Conexion con = new Conexion(Global.driver, Global.url, Global.user, Global.pass);
       try {
           //CREAMOS EL ARRAYLIST DE LOS COMANDOS O SENTENCIAS SQL
           ArrayList<Comando> comandos = new ArrayList<Comando>();
-          //CREAMOS EL PRIMER COMANDO QUE SERA AÑADIDO AL ARRAYLIST D COMANDOS
+          //CREAMOS EL PRIMER COMANDO QUE SERA AÃ‘ADIDO AL ARRAYLIST D COMANDOS
           Comando cmd= new Comando();
           //SETEAMOS LA FUNCION AL COMAND0
-          cmd.setSetenciaSql("select * from public.usuario_rol_insertar(?,?)");
+          cmd.setSetenciaSql("select * from public.sg_rol_insertar(?,?)");
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
-          parametros.add(new Parametro(1,usuariorol.getUsuarios().getUsuarioid()));
-          parametros.add(new Parametro(2, usuariorol.getRoles().getRolid()));
-         
-      
+          parametros.add(new Parametro(1, sg_roles.getNombre_rol()));
+          parametros.add(new Parametro(2, sg_roles.getDescripcion()));
+          
+
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
           comandos.add(cmd);
@@ -177,23 +198,25 @@ public class Usuariorol {
 
   }
     
-     public static boolean usuariorol_editar(Usuariorol usuariorol) throws Exception
+     public static boolean sg_rol_editar(Sg_rol sg_roles) throws Exception
   {
       boolean respuesta=false;
       Conexion con = new Conexion(Global.driver, Global.url, Global.user, Global.pass);
       try {
           //CREAMOS EL ARRAYLIST DE LOS COMANDOS O SENTENCIAS SQL
           ArrayList<Comando> comandos = new ArrayList<Comando>();
-          //CREAMOS EL PRIMER COMANDO QUE SERA AÑADIDO AL ARRAYLIST D COMANDOS
+          //CREAMOS EL PRIMER COMANDO QUE SERA AÃ‘ADIDO AL ARRAYLIST D COMANDOS
           Comando cmd= new Comando();
           //SETEAMOS LA FUNCION AL COMAND0
-          cmd.setSetenciaSql("select * from public.usuario_rol_editar(?,?,?)");
+          cmd.setSetenciaSql("select * from public.sg_rol_editar(?,?,?)");
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
-          parametros.add(new Parametro(1, usuariorol.getUsuariorolid()));
-           parametros.add(new Parametro(2,usuariorol.getUsuarios().getUsuarioid()));
-          parametros.add(new Parametro(3, usuariorol.getRoles().getRolid()));
+
+          parametros.add(new Parametro(1, sg_roles.getRolid()));
+          parametros.add(new Parametro(2, sg_roles.getNombre_rol()));
+          parametros.add(new Parametro(3, sg_roles.getDescripcion()));
+          
           
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
@@ -212,21 +235,21 @@ public class Usuariorol {
 
   }
      
-      public static boolean usuariorol_eliminar(int piusuariorolid) throws Exception
+      public static boolean sg_rol_eliminar(int pscactbevidenid) throws Exception
   {
       boolean respuesta=false;
       Conexion con = new Conexion(Global.driver, Global.url, Global.user, Global.pass);
       try {
           //CREAMOS EL ARRAYLIST DE LOS COMANDOS O SENTENCIAS SQL
           ArrayList<Comando> comandos = new ArrayList<Comando>();
-          //CREAMOS EL PRIMER COMANDO QUE SERA AÑADIDO AL ARRAYLIST D COMANDOS
+          //CREAMOS EL PRIMER COMANDO QUE SERA AÃ‘ADIDO AL ARRAYLIST D COMANDOS
           Comando cmd= new Comando();
           //SETEAMOS LA FUNCION AL COMAND0
-          cmd.setSetenciaSql("select * from public.usuario_rol_eliminar(?)");
+          cmd.setSetenciaSql("select * from public.sg_rol_eliminar(?)");
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
-          parametros.add(new Parametro(1, piusuariorolid));
+          parametros.add(new Parametro(1, pscactbevidenid));
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
           comandos.add(cmd);
@@ -243,5 +266,6 @@ public class Usuariorol {
       return respuesta;
 
   }
-
+    
+    
 }

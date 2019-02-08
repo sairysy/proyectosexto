@@ -1,12 +1,10 @@
-
-
-<%@page import="ReglasDeNegocio.Usuarios"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="ReglasDeNegocio.Sg_usuario"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
- List<Usuarios> lista=Usuarios.usuarios_buscartodos();
- Iterator<Usuarios> itUsuarios=lista.iterator();
+ List<Sg_usuario> lista=Sg_usuario.sg_usuarios_buscartodos();
+ Iterator<Sg_usuario> itUsuario=lista.iterator();
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +19,7 @@
        
 
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
-        <title>Usuarioss</title>
+        <title>JSP Page</title>
     </head>
     <body>
          <!--Sección alerta-->
@@ -44,7 +42,6 @@
         </div>
        <% }%>
         <!--Fin Sección alerta-->
-        <center>  <button type="button" ><strong><a href="../../Menu.html">MENU</a></strong></button></center>
          <h1>Usuarios</h1> 
            <button type="button" onclick="return modalnuevo();" class="btn btn-primary" data-toggle="modal" data-target="#ModalNuevo"> Nuevo</button>  
           
@@ -52,27 +49,24 @@
          
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">                <thead>
                 <th>Id</th>
-                <th>Nombre</th>
-                <th>Contrasenia</th>
-                <th>Cedula</th>
-            
-                
+                <th>Nombre Usuario</th>
+                <th>Contraseña</th>
+                <th>Identificacion</th>                
                 
                 <th></th>
                 </thead>
                 <tbody>
-               <%while(itUsuarios.hasNext()){
-                  Usuarios usuarios=itUsuarios.next();%>
+               <%while(itUsuario.hasNext()){
+                  Sg_usuario usuario=itUsuario.next();%>
                 <tr>
-                   <td><%= usuarios.getUsuarioid()%></td>
-                    <td><%= usuarios.getNombre_usuario()%></td>
-                    <td><%= usuarios.getContrasenia()%></td>
-                    <td><%= usuarios.getCedula()%></td>
-                  
+                   <td><%= usuario.getUsuarioid()%></td>
+                    <td><%= usuario.getNombre_usuario()%></td>
+                    <td><%= usuario.getContrasenia()%></td>
+                    <td><%= usuario.getIdentificacion()%></td>
                    
                    <td>
-                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= usuarios.getUsuarioid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
-                      <button type="button"  onclick="return modaleditar(<%= usuarios.getUsuarioid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
+                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= usuario.getUsuarioid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
+                      <button type="button"  onclick="return modaleditar(<%= usuario.getUsuarioid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
 
                    </td>
                 </tr>
@@ -85,7 +79,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Usuarios</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -104,7 +98,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuarios</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -138,14 +132,12 @@
            
       
             $('.modal-body').load('editar.jsp?codigo='+codigo,function(){
-
             });
         }
         function modalnuevo(codigo){
            
       
             $('.modal-body').load('nuevo.jsp',function(){
-
             });
         }
          <!--Sección datatable-->
@@ -157,12 +149,12 @@
                         language: {
                         "decimal": "",
                         "emptyTable": "No hay información",
-                        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+                        "info": "Mostrando START a END de TOTAL Entradas",
                         "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                        "infoFiltered": "(Filtrado de MAX total entradas)",
                         "infoPostFix": "",
                         "thousands": ",",
-                        "lengthMenu": "Mostrar _MENU_ Entradas",
+                        "lengthMenu": "Mostrar MENU Entradas",
                         "loadingRecords": "Cargando...",
                         "processing": "Procesando...",
                         "search": "Buscar:",
@@ -176,11 +168,8 @@
                           "buttons": {
                             "copy": "Copiar",
                             "colvis": "Columnas visibles",
-
                         }}
-
                 } );
-
                 table.buttons().container()
                     .appendTo( '#example_wrapper .col-md-6:eq(0)' );
             } );

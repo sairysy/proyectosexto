@@ -5,15 +5,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Nueva Pagina</title>
         
     </head>
     <body>
         
         
           <form method="POST"  action="procesa_nuevo.jsp">
-            <input type="text" class="form-control" placeholder="Url Paginas" required id="url_paginas" name="url_paginas"/>
-             <input type="text" class="form-control" placeholder="Descripcion Paginas" required id="descripcion_paginas" name="descripcion_paginas"/>
+            <input type="text" class="form-control" placeholder="Url" required id="url" name="url"/>
+             <input type="text" class="form-control" placeholder="Descripcion" required id="descripcion" name="descripcion"/>
            
             <div class="modal-footer">
                 <button id="btn_guardar" name="btn_guardar" type="submit" class="btn btn-primary" >Guardar</button>

@@ -1,12 +1,10 @@
-
-
-<%@page import="ReglasDeNegocio.Ordenes"%>
+<%@page import="ReglasDeNegocio.Orden"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
- List<Ordenes> lista=Ordenes.ordenes_buscartodos();
- Iterator<Ordenes> itOrdenes=lista.iterator();
+ List<Orden> lista=Orden.orden_buscartodos();
+ Iterator<Orden> itOrden=lista.iterator();
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +19,7 @@
        
 
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
-        <title>Ordeness</title>
+        <title>Ordenes</title>
     </head>
     <body>
          <!--Sección alerta-->
@@ -47,7 +45,7 @@
         <center>  <button type="button" ><strong><a href="../../Menu.html">MENU</a></strong></button></center>
          <h1>Ordenes</h1> 
            <button type="button" onclick="return modalnuevo();" class="btn btn-primary" data-toggle="modal" data-target="#ModalNuevo"> Nuevo</button>  
-          
+           
          
          
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">                <thead>
@@ -55,30 +53,28 @@
                 <th>Proveedor</th>
                 <th>Producto</th>
                 <th>Cantidad</th>
-                <th>Preciounitario</th>                
-                <th>Numero_orden</th>
-                <th>Entrega</th>
-                <th>Fecha_entrega</th>
-                           
+                <th>Precio unitario</th>                                
+                <th>Numero orden</th>               
+                <th>Entregada</th>
+                <th>Fecha entrega</th>
                 <th></th>
                 </thead>
                 <tbody>
-               <%while(itOrdenes.hasNext()){
-                  Ordenes ordenes=itOrdenes.next();%>
+               <%while(itOrden.hasNext()){
+                  Orden orden=itOrden.next();%>
                 <tr>
-                   <td><%= ordenes.getOrdenid()%></td>
-                    <td><%= ordenes.getProveedores()%></td>
-                    <td><%= ordenes.getProducto()%></td>
-                    <td><%= ordenes.getCantidad()%></td>
-                    <td><%= ordenes.getPreciounitario()%></td>
-                     <td><%= ordenes.getNumeroorden()%></td>
-                    <td><%= ordenes.getEntregada()%></td>
-                    <td><%= ordenes.getFechaentrega()%></td>
-                  
-                   
-                   <td>
-                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= ordenes.getOrdenid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
-                      <button type="button"  onclick="return modaleditar(<%= ordenes.getOrdenid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
+                   <td><%=orden.getOrdenid()%></td>
+                    <td><%=orden.getProveedor()%></td>
+                    <td><%=orden.getProducto()%></td>
+                    <td><%=orden.getCantidad()%></td>
+                    <td><%=orden.getPreciounitario()%></td>
+                    <td><%=orden.getNumeroorden()%></td>
+                    <td><%=orden.isEntregada()%></td>
+                    <td><%=orden.getFechaentrega()%></td>                    
+                     
+                 <td>
+                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= orden.getOrdenid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
+                      <button type="button"  onclick="return modaleditar(<%= orden.getOrdenid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
 
                    </td>
                 </tr>
@@ -91,7 +87,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Ordenes</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -110,7 +106,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Ordenes</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Categoria</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>

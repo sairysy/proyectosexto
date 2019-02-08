@@ -1,12 +1,11 @@
 
-
-<%@page import="ReglasDeNegocio.Proveedores"%>
+<%@page import="ReglasDeNegocio.Proveedor"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
- List<Proveedores> lista=Proveedores.proveedores_buscartodos();
- Iterator<Proveedores> itProveedores=lista.iterator();
+ List<Proveedor> lista=Proveedor.proveedor_buscartodos();
+ Iterator<Proveedor> itProveedor=lista.iterator();
 %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +20,7 @@
        
 
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.validate.min.js"></script>
-        <title>Proveedoress</title>
+        <title>Proveedores</title>
     </head>
     <body>
          <!--Sección alerta-->
@@ -44,7 +43,6 @@
         </div>
        <% }%>
         <!--Fin Sección alerta-->
-        <center>  <button type="button" ><strong><a href="../../Menu.html">MENU</a></strong></button></center>
          <h1>Proveedores</h1> 
            <button type="button" onclick="return modalnuevo();" class="btn btn-primary" data-toggle="modal" data-target="#ModalNuevo"> Nuevo</button>  
           
@@ -52,27 +50,23 @@
          
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">                <thead>
                 <th>Id</th>
-                <th>Nombres </th>
-                <th>Direccion </th>
-                <th>Telefono </th>
-                
-                
-                
+                <th>Nombre Proveedor</th>
+                <th>Direccion</th>
+                <th>Telefono</th>                             
                 <th></th>
                 </thead>
                 <tbody>
-               <%while(itProveedores.hasNext()){
-                  Proveedores proveedores=itProveedores.next();%>
+               <%while(itProveedor.hasNext()){
+                  Proveedor proveedor=itProveedor.next();%>
                 <tr>
-                   <td><%= proveedores.getProveedorid()%></td>
-                    <td><%= proveedores.getNombreproveedor()%></td>
-                    <td><%= proveedores.getDireccion()%></td>
-                    <td><%= proveedores.getTelefefono()%></td>
-                    
+                   <td><%= proveedor.getProveedorid()%></td>
+                    <td><%= proveedor.getNombreproveedor()%></td>
+                    <td><%= proveedor.getDireccion()%></td>
+                    <td><%= proveedor.getTelefono()%></td>
                    
                    <td>
-                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= proveedores.getProveedorid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
-                      <button type="button"  onclick="return modaleditar(<%= proveedores.getProveedorid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
+                         <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= proveedor.getProveedorid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>
+                      <button type="button"  onclick="return modaleditar(<%= proveedor.getProveedorid()%>)" class="btn btn-primary" data-toggle="modal" data-target="#ModalEditar">Editar</button>  
 
                    </td>
                 </tr>
@@ -85,7 +79,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Proveedores</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Proveedor</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -104,7 +98,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Proveedores</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Nuevo Proveedor</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>

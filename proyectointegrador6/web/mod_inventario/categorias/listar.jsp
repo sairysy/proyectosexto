@@ -1,5 +1,6 @@
 
 
+
 <%@page import="ReglasDeNegocio.Categoria"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
@@ -50,12 +51,12 @@
           
          
          
+         
+         
 <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">                <thead>
                 <th>Id</th>
-                <th>Nombre_Categoria </th>
+                <th>Nombre Categoria</th>
                 <th>Descripcion</th>
-                
-                
                 <th></th>
                 </thead>
                 <tbody>
@@ -63,9 +64,10 @@
                   Categoria categoria=itCategoria.next();%>
                 <tr>
                    <td><%= categoria.getCategoriaid()%></td>
-                    <td><%= categoria.getNombre()%></td>
-                    <td><%= categoria.getDescripcion()%></td>
-                    
+                   <td><%= categoria.getNombre()%></td>
+                   <td><%= categoria.getDescripcion()%></td>
+                   
+                   
                    
                    <td>
                          <a class="btn btn-danger" href='procesa_eliminar.jsp?codigo=<%= categoria.getCategoriaid()%>' onclick="return confirm('¿Está seguro que desea eliminar este registro?');">Eliminar</a>

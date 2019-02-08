@@ -1,70 +1,93 @@
-
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ReglasDeNegocio;
 
-import AccesoADatos.*;
-import java.sql.*;
-import java.util.*;
+import AccesoADatos.Comando;
+import AccesoADatos.Conexion;
+import AccesoADatos.Global;
+import AccesoADatos.Parametro;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
+/**
+ *
+ * @author DiegoPatricio
+ */
+public class Sg_pagina {
+    private int paginaid;
+    private String url;
+    private String descripcion;
 
-
-public class Proveedores {
-  private int proveedorid;
-  private String nombreproveedor;
-  private String direccion;
-  private String telefefono;
-
-
-    public Proveedores() {
+    public Sg_pagina() {
     }
 
-    public Proveedores(int proveedorid, String nombreproveedor, String direccion, String telefefono) {
-        this.proveedorid = proveedorid;
-        this.nombreproveedor = nombreproveedor;
-        this.direccion = direccion;
-        this.telefefono = telefefono;
+    public Sg_pagina(int paginaid, String url, String descripcion) {
+        this.paginaid = paginaid;
+        this.url = url;
+        this.descripcion = descripcion;
     }
 
-    public int getProveedorid() {
-        return proveedorid;
+    /**
+     * @return the paginaid
+     */
+    public int getPaginaid() {
+        return paginaid;
     }
 
-    public void setProveedorid(int proveedorid) {
-        this.proveedorid = proveedorid;
+    /**
+     * @param paginaid the paginaid to set
+     */
+    public void setPaginaid(int paginaid) {
+        this.paginaid = paginaid;
     }
 
-    public String getNombreproveedor() {
-        return nombreproveedor;
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
     }
 
-    public void setNombreproveedor(String nombreproveedor) {
-        this.nombreproveedor = nombreproveedor;
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getDireccion() {
-        return direccion;
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
-    public String getTelefefono() {
-        return telefefono;
-    }
-
-    public void setTelefefono(String telefefono) {
-        this.telefefono = telefefono;
-    }
-   @Override
+    @Override
     public String toString() {
-        return getNombreproveedor();
+        return descripcion;
     }
-    public static ArrayList<Proveedores> proveedores_buscartodos() throws Exception
+
+    
+    
+    
+
+    public static ArrayList<Sg_pagina> sg_pagina_buscartodos() throws Exception
     {
          //CREO LISTA QUE RECIBIRA LOS DATOS DEL RESULSET
-        ArrayList<Proveedores> lista= new ArrayList<Proveedores>();
-          Proveedores obj= new Proveedores();
+        ArrayList<Sg_pagina> lista= new ArrayList<Sg_pagina>();
+          Sg_pagina obj= new Sg_pagina();
        ResultSet rs= null;
       //LLAMO LA CONEXION
       Conexion con= new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -73,7 +96,7 @@ public class Proveedores {
 
       try {
           //declaro mi sql
-          String sql= "select * from public.proveedores_buscartodos()";
+          String sql= "select * from public.sg_paginas_buscartodos()";
           //creo mi preparedstatement
           preStm=con.creaPreparedSmt(sql);
           //ejecuto el prepardestatement y le asigno a mi resulset
@@ -81,11 +104,11 @@ public class Proveedores {
           rs= con.ejecutaPrepared(preStm);
           obj=null;
           while (rs.next()) {
-              obj= new Proveedores();
-              obj.setProveedorid(rs.getInt("pproveedorid"));
-              obj.setNombreproveedor(rs.getString("pnombreproveedor"));
-              obj.setDireccion(rs.getString("pdireccion"));
-              obj.setTelefefono(rs.getString("ptelefono"));
+              obj= new Sg_pagina();
+              obj.setPaginaid(rs.getInt("ppaginaid"));
+              obj.setUrl(rs.getString("purl"));
+              obj.setDescripcion(rs.getString("pdescripcion"));
+              
               lista.add(obj);
           }
       } catch (SQLException e) {
@@ -101,11 +124,10 @@ public class Proveedores {
 
     }
     
-    public static Proveedores proveedores_buscarporid(int piproveedorid) throws Exception
+    public static Sg_pagina sg_pagina_buscarporid(int pscactbevidenid) throws Exception
     {
          //CREO LISTA QUE RECIBIRA LOS DATOS DEL RESULSET
-       ArrayList<Proveedores> lista= new ArrayList<Proveedores>();
-       Proveedores obj= new Proveedores();
+          Sg_pagina obj= new Sg_pagina();
        ResultSet rs= null;
       //LLAMO LA CONEXION
       Conexion con= new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -114,22 +136,19 @@ public class Proveedores {
        
       try {
           //declaro mi sql
-          String sql= "select * from public.proveedores_buscarporid(?)";
+          String sql= "select * from public.sg_paginas_buscarporid(?)";
           //creo mi preparedstatement
           preStm=con.creaPreparedSmt(sql);
           //ejecuto el prepardestatement y le asigno a mi resulset
-          preStm.setInt(1, piproveedorid);
+          preStm.setInt(1, pscactbevidenid);
           rs= con.ejecutaPrepared(preStm);
           obj=null;
           while (rs.next()) {
-              obj= new Proveedores();
-              obj.setProveedorid(rs.getInt("pproveedorid"));
-              obj.setNombreproveedor(rs.getString("pnombreproveedor"));
-              obj.setDireccion(rs.getString("pdireccion"));
-              obj.setTelefefono(rs.getString("ptelefono"));
-            
+              obj= new Sg_pagina();
+              obj.setPaginaid(rs.getInt("ppaginaid"));
+              obj.setUrl(rs.getString("purl"));
+              obj.setDescripcion(rs.getString("pdescripcion"));
               
-              lista.add(obj);
           }
       } catch (SQLException e) {
           System.out.println(e.getMessage());
@@ -145,7 +164,7 @@ public class Proveedores {
     }
     
     
-     public static boolean proveedores_insertar(Proveedores proveedores) throws Exception
+     public static boolean sg_pagina_insertar(Sg_pagina sg_paginas) throws Exception
   {
       boolean respuesta=false;
       Conexion con = new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -155,14 +174,14 @@ public class Proveedores {
           //CREAMOS EL PRIMER COMANDO QUE SERA AÃ‘ADIDO AL ARRAYLIST D COMANDOS
           Comando cmd= new Comando();
           //SETEAMOS LA FUNCION AL COMAND0
-          cmd.setSetenciaSql("select * from public.proveedor_insertar(?,?,?)");
+          cmd.setSetenciaSql("select * from public.sg_pagina_insertar(?,?)");
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
-          parametros.add(new Parametro(1, proveedores.getNombreproveedor()));
-          parametros.add(new Parametro(2, proveedores.getDireccion()));
-          parametros.add(new Parametro(3, proveedores.getTelefefono()));
+          parametros.add(new Parametro(1, sg_paginas.getUrl()));
+          parametros.add(new Parametro(2, sg_paginas.getDescripcion()));
           
+
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
           comandos.add(cmd);
@@ -180,7 +199,7 @@ public class Proveedores {
 
   }
     
-     public static boolean proveedores_editar(Proveedores proveedores) throws Exception
+     public static boolean sg_pagina_editar(Sg_pagina sg_paginas) throws Exception
   {
       boolean respuesta=false;
       Conexion con = new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -190,17 +209,15 @@ public class Proveedores {
           //CREAMOS EL PRIMER COMANDO QUE SERA AÃ‘ADIDO AL ARRAYLIST D COMANDOS
           Comando cmd= new Comando();
           //SETEAMOS LA FUNCION AL COMAND0
-          cmd.setSetenciaSql("select * from public.proveedores_editar(?,?,?,?)");
+          cmd.setSetenciaSql("select * from public.sg_pagina_editar(?,?,?)");
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
 
-          parametros.add(new Parametro(1, proveedores.getProveedorid()));
-          parametros.add(new Parametro(2, proveedores.getNombreproveedor()));
-          parametros.add(new Parametro(3, proveedores.getDireccion()));
-          parametros.add(new Parametro(4, proveedores.getTelefefono()));
+          parametros.add(new Parametro(1, sg_paginas.getPaginaid()));
+          parametros.add(new Parametro(2, sg_paginas.getUrl()));
+          parametros.add(new Parametro(3, sg_paginas.getDescripcion()));
           
-        
           
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
@@ -219,7 +236,7 @@ public class Proveedores {
 
   }
      
-      public static boolean proveedores_eliminar(int piproveedorid) throws Exception
+      public static boolean sg_pagina_eliminar(int pscactbevidenid) throws Exception
   {
       boolean respuesta=false;
       Conexion con = new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -229,11 +246,11 @@ public class Proveedores {
           //CREAMOS EL PRIMER COMANDO QUE SERA AÃ‘ADIDO AL ARRAYLIST D COMANDOS
           Comando cmd= new Comando();
           //SETEAMOS LA FUNCION AL COMAND0
-          cmd.setSetenciaSql("select * from public.proveedor_eliminar(?)");
+          cmd.setSetenciaSql("select * from public.sg_pagina_eliminar(?)");
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
-          parametros.add(new Parametro(1, piproveedorid));
+          parametros.add(new Parametro(1, pscactbevidenid));
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
           comandos.add(cmd);
@@ -250,6 +267,5 @@ public class Proveedores {
       return respuesta;
 
   }
-
+    
 }
-

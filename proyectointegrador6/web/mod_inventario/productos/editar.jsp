@@ -6,8 +6,6 @@
  List<Categoria> lista= Categoria.categoria_buscartodos();
  Iterator<Categoria> itCategoria=lista.iterator();
 %>
-
-
 <%!
    Producto producto= new Producto();
 %>
@@ -16,7 +14,10 @@
         
          int codigo= Integer.parseInt(request.getParameter("codigo"));
       //  out.print("<script>alert("+codigo+");</script>");
-         producto=Producto.producto_buscarporid(codigo);                       
+         producto=Producto.producto_buscarporid(codigo);
+        
+        
+        
         } catch (Exception e) {
         }
    
@@ -26,27 +27,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Venta</title>
+        <title>Editar Producto</title>
      
     </head>
     
-    <body>                    
+    <body>
+       
+        
+        
           <form method="POST" action="procesa_editar.jsp">
-          <input type="hidden" id="codigo" name="codigo" value="<%=producto.getProductoid()%>">  
-          <input type="text" required class="form-control" placeholder="Nombreproducto Producto" id="nombreproducto_producto" value="<%=producto.getNombreproducto()%>" name="nombreproducto_producto"/>
-          <select required class="form-control" placeholder="Categoriaid Categoria" id="categoriaid" value="<%=producto.getCategoria()%>"  name="categoriaid">
-          
+              <input type="hidden" id="codigo" name="codigo" value="<%=producto.getProductoid()%>">
+              <input type="text" required class="form-control" placeholder="Nombre Producto" id="nombre_producto" value="<%=producto.getNombreproducto()%>" name="nombre_producto"/>
+               <input type="text" required class="form-control" placeholder="Stock" id="Stock" value="<%=producto.getStock()%>" name="Stock"/>
+              <select required class="form-control" placeholder="Id Categoria" id="id_categoria" value="<%=producto.getCategoria()%>"  name="id_categoria">          
             <%while(itCategoria.hasNext()){
                 Categoria categoria=itCategoria.next();%> %>
             <option value="<%=categoria.getCategoriaid()%>"><%=categoria.getNombre()%></option>
             <% } %>
-                                  
-            </select> 
-          <input type="text" required class="form-control" placeholder="Stock Producto" id="stock_producto" value="<%=producto.getStock()%>" name="stock_producto"/>
-          <input type="text" required class="form-control" placeholder="Precio Producto" id="precio_producto" value="<%=producto.getPrecio()%>" name="precio_producto"/>
-     
-          
-          
+          </select>
             <div class="modal-footer">
                 <button id="btn_guardar" name="btn_guardar" type="submit" class="btn btn-primary" >Guardar</button>
                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -57,3 +55,4 @@
     </body>
     
 </html>
+

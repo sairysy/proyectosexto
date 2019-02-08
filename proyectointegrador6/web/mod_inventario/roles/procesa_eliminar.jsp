@@ -1,10 +1,10 @@
 
-<%@page import="ReglasDeNegocio.Roles"%>
+<%@page import="ReglasDeNegocio.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
 try {
-       boolean result =Roles.roles_eliminar(Integer.valueOf(request.getParameter("codigo")));
+       boolean result =Sg_rol.sg_rol_eliminar(Integer.valueOf(request.getParameter("codigo")));
         if (result)
         out.println("<script> location.replace('listar.jsp?alerta=si');</script>");
         else 

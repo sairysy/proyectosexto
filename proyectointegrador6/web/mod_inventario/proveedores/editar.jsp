@@ -1,22 +1,17 @@
-<%-- 
-    Document   : editar
-    Created on : 09/01/2019, 17:27:36
-    Author     : sairy
---%>
-<%@page import="ReglasDeNegocio.Proveedores"%>
+<%@page import="ReglasDeNegocio.Proveedor"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%!
-   Proveedores proveedores= new Proveedores();
+   Proveedor proveedor= new Proveedor();
 %>
 <%
     try {
         
          int codigo= Integer.parseInt(request.getParameter("codigo"));
       //  out.print("<script>alert("+codigo+");</script>");
-         proveedores=Proveedores.proveedores_buscarporid(codigo);
+         proveedor=Proveedor.proveedor_buscarporid(codigo);
         
         
         
@@ -29,7 +24,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Proveedores</title>
+        <title>Editar Proveedor</title>
      
     </head>
     
@@ -38,11 +33,10 @@
         
         
           <form method="POST" action="procesa_editar.jsp">
-              <input type="hidden" id="codigo" name="codigo" value="<%=proveedores.getProveedorid()%>">
-              <input type="text" required class="form-control" placeholder="Nombreproveedor Proveedores" id="nombre_proveedores" value="<%=proveedores.getNombreproveedor()%>" name="nombreproveedor"/>
-              <input type="text" required class="form-control" placeholder="Direccion Proveedores" id="nombre_proveedores" value="<%=proveedores.getDireccion()%>" name="direccion"/>
-          <input type="text" required class="form-control" placeholder="Telefono Proveedores" id="nombre_proveedores" value="<%=proveedores.getTelefefono()%>" name="telefono"/>
-
+              <input type="hidden" id="codigo" name="codigo" value="<%=proveedor.getProveedorid()%>">
+              <input type="text" required class="form-control" placeholder="Nombre Proveedor" id="nombre_proveedor" value="<%=proveedor.getNombreproveedor()%>" name="nombre_proveedor"/>
+              <input type="text" required class="form-control" placeholder="Direccion Proveedor" id="direccion_proveedor" value="<%=proveedor.getDireccion()%>" name="direccion_proveedor"/>
+          <input type="text" required class="form-control" placeholder="Telefono Proveedor" id="telefono_proveedor" value="<%=proveedor.getTelefono()%>" name="telefono_proveedor"/>
           
           
             <div class="modal-footer">
@@ -55,3 +49,4 @@
     </body>
     
 </html>
+

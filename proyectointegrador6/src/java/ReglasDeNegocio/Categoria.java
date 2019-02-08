@@ -1,27 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ReglasDeNegocio;
+import AccesoADatos.*;
+import java.sql.*;
+import java.util.*;
 
-import AccesoADatos.Comando;
-import AccesoADatos.Conexion;
-import AccesoADatos.Global;
-import AccesoADatos.Parametro;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-/**
- *
- * @author ESCUELA
- */
 public class Categoria {
-    public int categoriaid;
-    public String nombre;
-    public String descripcion;
+  private int categoriaid;
+  private String nombre;
+  private String descripcion;
 
     public Categoria() {
     }
@@ -55,15 +40,17 @@ public class Categoria {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-     @Override
+
+    @Override
     public String toString() {
-        return getNombre();
+        return nombre;
     }
+    
     public static ArrayList<Categoria> categoria_buscartodos() throws Exception
     {
          //CREO LISTA QUE RECIBIRA LOS DATOS DEL RESULSET
-        ArrayList<Categoria> lista= new ArrayList<Categoria>();
-          Categoria obj= new Categoria();
+       ArrayList<Categoria> lista= new ArrayList<Categoria>();
+       Categoria obj= new Categoria();
        ResultSet rs= null;
       //LLAMO LA CONEXION
       Conexion con= new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -84,7 +71,6 @@ public class Categoria {
               obj.setCategoriaid(rs.getInt("pcategoriaid"));
               obj.setNombre(rs.getString("pnombre"));
               obj.setDescripcion(rs.getString("pdescripcion"));
-              
               lista.add(obj);
           }
       } catch (SQLException e) {
@@ -100,11 +86,11 @@ public class Categoria {
 
     }
     
-    public static Categoria categoria_buscarporid(int picategoriaid) throws Exception
+    public static Categoria categoria_buscarporid(int pscactbevidenid) throws Exception
     {
          //CREO LISTA QUE RECIBIRA LOS DATOS DEL RESULSET
-       ArrayList<Categoria> lista= new ArrayList<Categoria>();
-       Categoria obj= new Categoria();
+        ArrayList<Categoria> lista= new ArrayList<Categoria>();
+          Categoria obj= new Categoria();
        ResultSet rs= null;
       //LLAMO LA CONEXION
       Conexion con= new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -117,7 +103,7 @@ public class Categoria {
           //creo mi preparedstatement
           preStm=con.creaPreparedSmt(sql);
           //ejecuto el prepardestatement y le asigno a mi resulset
-          preStm.setInt(1, picategoriaid);
+          preStm.setInt(1, pscactbevidenid);
           rs= con.ejecutaPrepared(preStm);
           obj=null;
           while (rs.next()) {
@@ -125,8 +111,6 @@ public class Categoria {
               obj.setCategoriaid(rs.getInt("pcategoriaid"));
               obj.setNombre(rs.getString("pnombre"));
               obj.setDescripcion(rs.getString("pdescripcion"));
-
-              
               lista.add(obj);
           }
       } catch (SQLException e) {
@@ -187,7 +171,7 @@ public class Categoria {
           //CREAMOS EL PRIMER COMANDO QUE SERA AÃ‘ADIDO AL ARRAYLIST D COMANDOS
           Comando cmd= new Comando();
           //SETEAMOS LA FUNCION AL COMAND0
-          cmd.setSetenciaSql("select * from public.categoria_editar(?,?,?)");
+          cmd.setSetenciaSql("select * from categoria_editar(?,?,?)");
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
@@ -195,7 +179,6 @@ public class Categoria {
           parametros.add(new Parametro(1, categoria.getCategoriaid()));
           parametros.add(new Parametro(2, categoria.getNombre()));
           parametros.add(new Parametro(3, categoria.getDescripcion()));
-       
           
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
@@ -214,7 +197,7 @@ public class Categoria {
 
   }
      
-      public static boolean categoria_eliminar(int picategoriaid) throws Exception
+      public static boolean categoria_eliminar(int pscactbevidenid) throws Exception
   {
       boolean respuesta=false;
       Conexion con = new Conexion(Global.driver, Global.url, Global.user, Global.pass);
@@ -228,7 +211,7 @@ public class Categoria {
           //CREAMOS EL ARRALIST DE PARAMETROS PARA ASIGANR A MI PRIMER COMANDO
           ArrayList<Parametro> parametros = new ArrayList<Parametro>();
           //llenamos el arraylist con todos los parametros
-          parametros.add(new Parametro(1, picategoriaid));
+          parametros.add(new Parametro(1, pscactbevidenid));
           //llenar el comando con los parametros
           cmd.setLstParametros(parametros);
           comandos.add(cmd);
@@ -245,9 +228,9 @@ public class Categoria {
       return respuesta;
 
   }
-
+    
 }
 
 
-    
 
+    

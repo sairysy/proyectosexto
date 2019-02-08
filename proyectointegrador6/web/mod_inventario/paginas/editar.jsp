@@ -1,22 +1,17 @@
-<%-- 
-    Document   : editar
-    Created on : 09/01/2019, 17:27:36
-    Author     : sairy
---%>
-<%@page import="ReglasDeNegocio.Paginas"%>
+<%@page import="ReglasDeNegocio.*"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%!
-   Paginas paginas= new Paginas();
+   Sg_pagina sg_paginas= new Sg_pagina();
 %>
 <%
     try {
         
          int codigo= Integer.parseInt(request.getParameter("codigo"));
       //  out.print("<script>alert("+codigo+");</script>");
-         paginas=Paginas.paginas_buscarporid(codigo);
+         sg_paginas=Sg_pagina.sg_pagina_buscarporid(codigo);
         
         
         
@@ -29,7 +24,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Paginas</title>
+        <title>Editar Pagina</title>
      
     </head>
     
@@ -38,9 +33,9 @@
         
         
           <form method="POST" action="procesa_editar.jsp">
-              <input type="hidden" id="codigo" name="codigo" value="<%=paginas.getPaginaid()%>">
-              <input type="text" required class="form-control" placeholder="Url Paginas" id="url_paginas" value="<%=paginas.getUrl()%>" name="url_paginas"/>
-              <input type="text" required class="form-control" placeholder="Descripcion Paginas" id="descripcion_paginas" value="<%=paginas.getDescripcion()%>" name="descripcion_paginas"/>
+              <input type="hidden" id="codigo" name="codigo" value="<%=sg_paginas.getPaginaid()%>">
+              <input type="text" required class="form-control" placeholder="Url Pagina" id="url" value="<%=sg_paginas.getUrl()%>" name="url"/>
+              <input type="text" required class="form-control" placeholder="Descripcion" id="descripcion" value="<%=sg_paginas.getDescripcion()%>" name="descripcion"/>
           
           
             <div class="modal-footer">

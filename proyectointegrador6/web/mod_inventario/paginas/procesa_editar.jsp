@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <%
     try {
-            Paginas paginas=new Paginas();
-            paginas.setUrl(request.getParameter("url_paginas"));
-            paginas.setDescripcion(request.getParameter("descripcion_paginas"));
-            paginas.setPaginaid(Integer.valueOf(request.getParameter("codigo")));
-           boolean result= Paginas.paginas_editar(paginas);
+            Sg_pagina sg_paginas=new Sg_pagina();
+            sg_paginas.setUrl(request.getParameter("url"));
+            sg_paginas.setDescripcion(request.getParameter("descripcion"));
+            sg_paginas.setPaginaid(Integer.valueOf(request.getParameter("codigo")));
+           boolean result= Sg_pagina.sg_pagina_editar(sg_paginas);
              if (result)
                 out.println("<script> location.replace('listar.jsp?alerta=si');</script>");
             else 

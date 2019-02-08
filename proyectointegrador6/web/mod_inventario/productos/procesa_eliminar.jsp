@@ -1,3 +1,8 @@
+<%-- 
+    Document   : procesa_eliminar
+    Created on : 09-ene-2019, 17:11:37
+    Author     : SYSTEMarket-pc
+--%>
 
 <%@page import="ReglasDeNegocio.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
